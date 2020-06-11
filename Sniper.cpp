@@ -1,51 +1,56 @@
 #pragma once
 #include "Sniper.hpp"
 
-#define DAMAGE 50
 
-int Sniper::hit(std::vector<std::vector<Soldier*>>& board, int rows, int cols)
-{
-    std::pair<int,int> to_attack = find_solider_to_active_the_skill(board);
-    board[to_attack.first][to_attack.second]->health -= DAMAGE;
 
-    if(board[to_attack.first][to_attack.second]->health <= 0)
-    {
-        delete board[to_attack.first][to_attack.second];
-        board[to_attack.first][to_attack.second] = nullptr;
+int Sniper::hit(std::vector<std::vector<Soldier*>>& board, int rows, int cols){
+
+
+    std::pair<int,int> attack = find_solider(board);
+
+    if(board[attack.first][attack.second]->hp <= 0){
+        delete board[attack.first][attack.second];
+        board[attack.first][attack.second] = 0;
         return 1;
     }
-    return 0;
+    return 1;
 }
-std::pair<int,int> Sniper::get_loc()
-{
+std::pair<int,int> Sniper::get_loc(){
+
     return {this->location.first, this->location.second};
 }
-int Sniper::get_id()
-{
+
+
+int Sniper::get_id(){
+
     return this->player_id;
 }
 
-Soldier &Sniper::operator=(Soldier *copy_from) {
+Soldier &Sniper::operator=(Soldier *copy_from)
+{
+
     Soldier* the_copy = new Sniper(copy_from->get_id());
-    the_copy->health = copy_from->health;
+    the_copy->hp = copy_from->hp;
     Soldier & ret = *the_copy;
+
+
     return ret;
 }
-std::pair<int, int> Sniper::find_solider_to_active_the_skill(std::vector<std::vector<Soldier*>> board)
-{
+std::pair<int, int> Sniper::find_solider(std::vector<std::vector<Soldier*>> board){
     int max = 0;
     std::pair<int,int> ans ;
 
-    for (int i = 0; i < board.size(); ++i)
-    {
-        for (int j = 0; j < board.at(0).size(); ++j)
-        {
-            if (board[i][j] != nullptr && board[i][j]->get_id()!=player_id)
-            {
-                if(board[i][j]->health > max)
-                {
+    for (int i = 0; i < board.size(); ++i){
+
+        for (int j = 0; j < board.at(0).size(); ++j){
+
+            if (board[i][j] != nullptr && board[i][j]->get_id()!=player_id){
+
+                if(board[i][j]->hp > max){
+
                     ans = {i,j};
-                    max = board[i][j]->health;
+
+                    max = board[i][j]->hp;
                 }
             }
         }
@@ -53,8 +58,8 @@ std::pair<int, int> Sniper::find_solider_to_active_the_skill(std::vector<std::ve
     return ans;
 }
 
-void Sniper::return_to_max_health()
+void Sniper::return_max_hp()
 {
-    this->health = MAX_HEALTH;
+    this->hp = 50;
 }
 

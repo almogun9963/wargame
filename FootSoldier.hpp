@@ -3,8 +3,8 @@
 
 #include "Soldier.hpp"
 #include "Board.hpp"
-#define MAX_HEALTH 100
-#define HIT_DAMAGE 10
+
+
 
 class FootSoldier : public Soldier
 {
@@ -15,13 +15,13 @@ public:
     FootSoldier(int player_id)
     {
         this->player_id = player_id;
-        this->health = MAX_HEALTH;
+        this->hp = 100;
     }
 
     FootSoldier(FootSoldier& to_copy)
     {
         this->player_id = to_copy.player_id;
-        this->health = to_copy.health;
+        this->hp = to_copy.hp;
         this->location = to_copy.location;
     }
 
@@ -35,9 +35,9 @@ public:
     std::pair<int,int> get_loc();
     int get_id();
     Soldier& copy();
-    std::pair<int, int> find_solider_to_active_the_skill(std::vector<std::vector<Soldier*>> board);
+    std::pair<int, int> find_solider(std::vector<std::vector<Soldier*>> board);
     static double dist(std::pair<int, int> from, std::pair<int, int> to);
-    void return_to_max_health();
+    void return_max_hp();
 
 
 

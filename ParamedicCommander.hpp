@@ -4,7 +4,7 @@
 
 #include "Soldier.hpp"
 
-#define MAX_HEALTH 200
+
 
 class ParamedicCommander : public Soldier {
 private:
@@ -13,13 +13,13 @@ public:
     explicit ParamedicCommander(int player_id)
     {
         this->player_id = player_id;
-        this->health = MAX_HEALTH;
+        this->hp = 200;
     }
 
     ParamedicCommander(ParamedicCommander& to_copy)
     {
         this->player_id = to_copy.player_id;
-        this->health = to_copy.health;
+        this->hp = to_copy.hp;
         this->location = to_copy.location;
     }
 
@@ -29,11 +29,12 @@ public:
     }
 
     int hit(std::vector<std::vector<Soldier*>> & board, int rows, int cols);
-    std::pair<int,int> get_loc();
-    int get_id();
     Soldier& operator=(Soldier* copy_from);
-    void return_to_max_health();
-    std::pair<int, int> find_solider_to_active_the_skill(std::vector<std::vector<Soldier*>> board);
+    void return_max_hp();
+    std::pair<int,int> get_loc();
+    std::pair<int, int> find_solider(std::vector<std::vector<Soldier*>> board);
+    int get_id();
+
 
 
 };
