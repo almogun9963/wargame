@@ -12,7 +12,7 @@ int Sniper::hit(std::vector<std::vector<Soldier*>>& board, int rows, int cols)
     {
         delete board[to_attack.first][to_attack.second];
         board[to_attack.first][to_attack.second] = nullptr;
-        return 1;                                        // dead
+        return 1;
     }
     return 0;
 }

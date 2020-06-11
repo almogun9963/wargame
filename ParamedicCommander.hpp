@@ -1,13 +1,42 @@
-#ifndef WARGAME_PARAMEDICCOMMANDER_HPP
-#define WARGAME_PARAMEDICCOMMANDER_HPP
 
+#ifndef UNTITLED_PARAMEDICCOMMANDER_PP
+#define UNTITLED_PARAMEDICCOMMANDER_PP
 
-#pragma once
-#include "Paramedic.hpp"
+#include "Soldier.hpp"
 
-class ParamedicCommander : public Paramedic {
+#define MAX_HEALTH 200
+
+class ParamedicCommander : public Soldier {
+private:
+    int player_id;
 public:
-    ParamedicCommander(int num_player): Paramedic(num_player,200){}
+    explicit ParamedicCommander(int player_id)
+    {
+        this->player_id = player_id;
+        this->health = MAX_HEALTH;
+    }
+
+    ParamedicCommander(ParamedicCommander& to_copy)
+    {
+        this->player_id = to_copy.player_id;
+        this->health = to_copy.health;
+        this->location = to_copy.location;
+    }
+
+    ~ParamedicCommander()
+    {
+        delete this;
+    }
+
+    int hit(std::vector<std::vector<Soldier*>> & board, int rows, int cols);
+    std::pair<int,int> get_loc();
+    int get_id();
+    Soldier& operator=(Soldier* copy_from);
+    void return_to_max_health();
+    std::pair<int, int> find_solider_to_active_the_skill(std::vector<std::vector<Soldier*>> board);
+
+
 };
 
-#endif //WARGAME_PARAMEDICCOMMANDER_HPP
+
+#endif //UNTITLED_PARAMEDICCOMMANDER_PP

@@ -1,6 +1,6 @@
 # cmake_minimum_required(VERSION <specify CMake version here>)
-project(untitled11)
+project(untitled12)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
-add_executable(untitled11 Test.cpp)
+add_executable(untitled12 main.cpp)

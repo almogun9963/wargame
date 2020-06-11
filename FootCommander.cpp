@@ -1,3 +1,37 @@
+#pragma once
 #include "FootCommander.hpp"
-void FootCommander::shoot(){}
-void FootCommander::move(int d){}
+#include "FootSoldier.hpp"
+
+
+
+int FootCommander::hit(std::vector<std::vector<Soldier*>> & board, int rows, int cols)
+{
+    return 0;
+}
+
+std::pair<int,int> FootCommander::get_loc()
+{
+    return{0,0};
+}
+
+int FootCommander::get_id()
+{
+    return 0;
+}
+
+Soldier& FootCommander::operator=(Soldier* copy_from)
+{
+    Soldier* a = new FootCommander(copy_from->get_id());
+    Soldier & ans = *a;
+    return ans;
+}
+std::pair<int, int> FootCommander::find_solider_to_active_the_skill(std::vector<std::vector<Soldier*>> board)
+{
+
+    return{0,0};
+}
+
+void FootCommander::return_to_max_health()
+{
+
+}
